@@ -13,14 +13,9 @@ export default function Header({ name }){
             <Text style={styles.username}>Olá, {name}</Text>
 
             
-            <TouchableOpacity activeOpacity={0.9} style={styles.buttonMenu}>
-                <Feather name="menu" size={27} color="#FFF" />
-            </TouchableOpacity>
-
-
             <TouchableOpacity activeOpacity={0.9} style={styles.buttonUser}>
                 <Feather name="user" size={27} color="#FFF" />
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
             </View>
         </View>
@@ -29,7 +24,8 @@ export default function Header({ name }){
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#000',
+        height: 150,
+        backgroundColor: '#fff',
         paddingTop: statusBarHeight,
         flexDirection: 'row',
         paddingStart: 16,
@@ -44,31 +40,20 @@ const styles = StyleSheet.create({
     },
     username:{
         fontSize: 18,
-        color: '#fff',
+        color: '#000',
         flex: 1,
         fontWeight: 'bold',
         textAlign: 'center',
         alignItems: 'center',
 
     },
-    buttonMenu:{
-        width: 44,
-        height: 44,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20/2,
-        left: 50,
-        
-    },
     buttonUser:{
         width: 44,
         height: 44,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        backgroundColor: '#000',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20/2,
-        right: 320,
-        
-    }
+        borderRadius: 40/2,        
+    },
+  
 })
