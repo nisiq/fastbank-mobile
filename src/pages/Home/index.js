@@ -4,6 +4,7 @@ import Extrato from '../../components/Extrato';
 import Movements from '../../components/Movements';
 import Actions from '../../components/Actions';
 
+// Dados de exemplo para a lista de movimentações
 const list = [
   {
     id: 1,
@@ -44,9 +45,9 @@ export default function Home() {
         <FlatList
           style={styles.list}
           data={list}
-          keyExtractor={ (item) => String(item.id)} //convertendo pra string
+          keyExtractor={ (item) => String(item.id)} // Converte o ID para uma string
           showsVerticalScrollIndicator={false} //nao ter barra de rolagem
-          renderItem={ ({ item }) => <Movements data={item} />} //passar em todos renderizando
+          renderItem={ ({ item }) => <Movements data={item} />} //renderiza cada item da lista usando o componente Movements
         
         
         ></FlatList>

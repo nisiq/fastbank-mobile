@@ -4,6 +4,8 @@ import { AntDesign } from '@expo/vector-icons'
 
 export default function Actions() {
  return (
+
+    // Início do componente ScrollView horizontal com alguns estilos - carrossel options
    <ScrollView style={styles.container} horizontal={true} showHorizontalScrollIndicator={false} >
 
     <TouchableOpacity style={styles.actionButton}>
