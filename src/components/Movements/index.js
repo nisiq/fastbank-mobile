@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 24,
         borderBottomWidth: 0.5,
-        borderBottomColor: '#000'
+        borderBottomColor: '#fff'
     },
     content: {
         flexDirection: 'row',
@@ -41,12 +41,13 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     date: {
-        color: '#000',
+        color: '#fff',
         fontWeight: 'bold',
     },
     label:{
         fontWeight: 'bold',
         fontSize: 16,
+        color: "#fff"
     },
     value: {
         fontSize: 16,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
         marginTop: 6,
         width: 80,
         height: 10,
-        backgroundColor: '#dadada',
+        backgroundColor: '#fff',
         borderRadius: 8,
     }
 })

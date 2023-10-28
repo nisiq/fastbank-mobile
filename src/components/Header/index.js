@@ -25,7 +25,7 @@ export default function Header({ name }){
 const styles = StyleSheet.create({
     container:{
         height: 150,
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
         paddingTop: statusBarHeight,
         flexDirection: 'row',
         paddingStart: 16,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     username:{
         fontSize: 18,
-        color: '#000',
+        color: '#fff',
         flex: 1,
         fontWeight: 'bold',
         textAlign: 'center',

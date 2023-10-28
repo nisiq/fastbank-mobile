@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-
 // Páginas
 import Home from './pages/Home'
 import Assistente from './pages/Assistente';
@@ -40,7 +39,7 @@ export function Routes(){
             name="Assistente" 
             component={Assistente}
             options={{
-                tabBarIcon: "attach-money"
+                tabBarIcon: "message"
             }}
             />
 
@@ -49,7 +48,7 @@ export function Routes(){
             name="Ajustes" 
             component={Ajustes}
             options={{
-                tabBarIcon: "storefront"
+                tabBarIcon: "settings"
             }}
             />
         </Tab.Navigator>

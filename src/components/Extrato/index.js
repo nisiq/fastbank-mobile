@@ -33,7 +33,7 @@ export default function Extrato({saldo, gastos}) {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingStart: 18,
@@ -49,27 +49,26 @@ const styles = StyleSheet.create({
     },
     itemTitle:{
         fontSize: 30,
-        color: '#fff',
+        color: '#000',
         fontWeight: 'bold',
         textAlign: 'center',
         alignItems: 'center',
-        color: '#fff',
     },
     content: {
         flexDirection: 'row',
         alignItems: 'center'
     },
     currencySymbol:{
-        color: '#fff',
+        color: '#000',
         marginRight: 6,
     },
     balance:{
         fontSize: 22,
-        color: '#2ecc'
+        color: '#080'
     },
     expenses:{
         fontSize: 22,
-        color: '#e74c3c'
+        color: 'red'
     }
 
 

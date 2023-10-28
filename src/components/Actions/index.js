@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, Feather } from '@expo/vector-icons'
 
 export default function Actions() {
  return (
@@ -46,7 +46,7 @@ export default function Actions() {
 
     <TouchableOpacity style={styles.actionButton}>
         <View style={styles.areaButton}>
-            <AntDesign name="setting" size={26} color="#000" />
+            <Feather name="user" size={26} color="#000" />
         </View>
         <Text style={styles.labelButton}>Conta</Text>
     </TouchableOpacity>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         marginRight: 32
     },
     areaButton:{
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#fff',
         height: 60,
         width: 60,
         borderRadius: 30,
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     labelButton:{
         marginTop: 4,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#fff'
     }
 })
