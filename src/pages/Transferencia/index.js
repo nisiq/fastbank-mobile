@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function Assistente() {
+export default function Transferencia() {
     return (
         <View style={StyleSheet.container}>
-            <Text>ASSISTENTEEEEEEEEE</Text>
+            <Text>Pagina Transferencia</Text>
         </View>
     );
 }

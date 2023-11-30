@@ -16,7 +16,7 @@ export default function Actions() {
     </TouchableOpacity>
 
 
-    <TouchableOpacity style={styles.actionButton}>
+    <TouchableOpacity style={styles.actionButton} >
         <View style={styles.areaButton}>
             <AntDesign name="tagso" size={26} color="#000" />
         </View>
