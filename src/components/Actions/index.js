@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons'
+import Transferencia from '../../pages/Transferencia';
 
 export default function Actions() {
  return (
@@ -8,7 +9,7 @@ export default function Actions() {
     // Início do componente ScrollView horizontal com alguns estilos - carrossel options
    <ScrollView style={styles.container} horizontal={true} showHorizontalScrollIndicator={false} >
 
-    <TouchableOpacity style={styles.actionButton}>
+    <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('Assistente')}>
         <View style={styles.areaButton}>
             <AntDesign name="addfolder" size={26} color="#000" />
         </View>

@@ -35,7 +35,7 @@ export default function Login() {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   
           // Sucesso, navegar para a página inicial
-          navigation.navigate('Home');
+          navigation.navigate('Main');
         }
       })
       .catch((err) => {

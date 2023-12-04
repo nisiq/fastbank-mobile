@@ -8,6 +8,7 @@ import Ajustes from './pages/Ajustes';
 import Welcome from './pages/Welcome';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
+import Transferencia from './pages/Transferencia'
 
 import CustomTabBar from './components/CustomTabBar';
 
@@ -52,11 +53,16 @@ const MainTab = () => (
     </Tab.Navigator>
   );
 
+  //      onPress={() => navigation.navigate(screenName)}
+
+
 const AuthStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="Welcome" component={Welcome} />
     <Stack.Screen name="Cadastro" component={Cadastro} />
     <Stack.Screen name="Login" component={Login} />
+    <Stack.Screen name="Transferencia" component={Transferencia} />
+
   </Stack.Navigator>
 );
 
@@ -66,7 +72,7 @@ export function Routes() {
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Auth" component={AuthStack} />
         <Stack.Screen name="Main" component={MainTab} />
-        <Stack.Screen name="Home" component={Home} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
