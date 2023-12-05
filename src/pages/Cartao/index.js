@@ -6,7 +6,7 @@ import { TextInputMask } from 'react-native-masked-text';
 
 
 
-export default function Transferencia() {
+export default function Cartao() {
 
   const [origem, setOrigem] = useState('')
   const [valor, setValor] = useState('')
@@ -42,32 +42,15 @@ export default function Transferencia() {
 
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
 
-        <Text style={styles.title}>Origem</Text>
-        <TextInputMask
-          placeholder="Digite id de sua conta"
-          style={styles.input}
-          onChangeText={(e) => setOrigem(e)}
-          keyboardType="numeric"
-          type="only-numbers"
-        />
-
         <Text style={styles.title}>Valor</Text>
         <TextInputMask
-          placeholder="Digite o valor"
+          placeholder="Digite seu salário atual"
           style={styles.input}
           onChangeText={(e) => setValor(e)}
           keyboardType="numeric"
           type="money"
         />
 
-        <Text style={styles.title}>Destino</Text>
-        <TextInputMask
-          placeholder="Digite o id do destinatario"
-          style={styles.input}
-          onChangeText={(e) => setDestino(e)}
-          keyboardType="numeric"
-          type="only-numbers"
-        />
 
         <TouchableOpacity style={styles.buttonTransfer}
           onPress={transferir}>

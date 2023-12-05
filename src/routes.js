@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Transferencia from './pages/Transferencia'
 
 import CustomTabBar from './components/CustomTabBar';
+import Cartao from './pages/Cartao';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -62,6 +63,8 @@ const AuthStack = () => (
     <Stack.Screen name="Cadastro" component={Cadastro} />
     <Stack.Screen name="Login" component={Login} />
     <Stack.Screen name="Transferencia" component={Transferencia} />
+    <Stack.Screen name="Cartao" component={Cartao} />
+
 
   </Stack.Navigator>
 );
@@ -70,6 +73,7 @@ export function Routes() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator headerMode="none">
+      
         <Stack.Screen name="Auth" component={AuthStack} />
         <Stack.Screen name="Main" component={MainTab} />
 
