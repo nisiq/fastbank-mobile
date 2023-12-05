@@ -3,6 +3,8 @@ import * as Animatable from 'react-native-animatable';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import axios from 'axios';
 import { TextInputMask } from 'react-native-masked-text';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -12,18 +14,51 @@ export default function Transferencia() {
   const [valor, setValor] = useState('')
   const [destino, setDestino] = useState('')
 
-  const transferir = () => {
-    const url = `http://127.0.0.1:8000/api/v1/accounts/${origem}/transferir/`;
 
-    axios.post(url, {
-      origem: origem,
-      valor: valor,
-      destino: destino,
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.error(err);
-    });
+  const transferir = async () => {
+    try {
+      // Obter o token armazenado
+      const token = await AsyncStorage.getItem('chave');
+  
+      // Verificar se o token está presente
+      if (!token) {
+        console.error('Token não encontrado. Faça login para obter um token válido.');
+        return;
+      }
+  
+      // URL para a transferência
+      const url = `https://ca2b-179-125-150-107.ngrok-free.app/api/v1/accounts/${origem}/transferir/`;
+  
+      // Configuração do cabeçalho com o token de autorização
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+  
+      // Dados da transferência
+      const data = {
+        conta_origem: origem,
+        conta_destino: destino,
+        valor: valor,
+      };
+  
+      // Realizar a solicitação de transferência
+      const response = await axios.post(url, data, { headers });
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: 'Sucesso!',
+        text2: 'Transferência Realizada com Sucesso',
+      });
+
+      // Manipular a resposta
+      console.log(response.data); // Dados da resposta
+
+      
+  
+    } catch (error) {
+      // Lidar com erros
+      console.error('Erro na transferência:', error.response.data);
+    }
   };
 
 
@@ -33,11 +68,6 @@ export default function Transferencia() {
 
       <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
         <Text style={styles.message}>Transferencia</Text>
-        <Animatable.Image
-          animation="flipInY" // Animação no Logo
-          style={{ width: '100%' }}
-          resizeMode="contain" // Mantém a proporção da imagem
-        />
       </Animatable.View>
 
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
@@ -65,7 +95,7 @@ export default function Transferencia() {
 
         <TouchableOpacity style={styles.buttonTransfer}
           onPress={transferir}>
-          Transferir
+          <Text>Transferir</Text>
         </TouchableOpacity>
 
 

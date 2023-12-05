@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // Animação
 import * as Animatable from 'react-native-animatable';
 //Navegação 
@@ -36,7 +38,7 @@ export default function Login() {
     }
     // Autenticação com o servidor
     axios
-      .post('http://127.0.0.1:8000/api/token/', {
+      .post('https://ca2b-179-125-150-107.ngrok-free.app/api/token/', {
         password: password,
         cpf: cpf,
       })
@@ -45,7 +47,7 @@ export default function Login() {
           const { access: token } = res.data;
 
           // Armazenar o token
-          localStorage.setItem('chave', token);
+          AsyncStorage.setItem('chave', token);
 
           // Token como padrão para as futuras solicitações
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -81,7 +83,6 @@ export default function Login() {
         <Text style={styles.message}>Tela Login</Text>
         <Animatable.Image
           animation="flipInY" // Animação no Logo
-          source={('../../assets/panda-senha2.png')}
           style={{ width: '100%' }}
           resizeMode="contain" // Mantém a proporção da imagem
         />
