@@ -20,17 +20,17 @@ export default function Actions() {
 
             <TouchableOpacity style={styles.actionButton} onPress={navigateToScreen('Transferencia')}>
                 <View style={styles.areaButton}>
-                    <AntDesign name="addfolder" size={26} color="#000" />
+                    <AntDesign name="swap" size={26} color="#000" />
                 </View>
-                <Text style={styles.labelButton}>Entradas</Text>
+                <Text style={styles.labelButton}>Transferencia</Text>
             </TouchableOpacity>
 
 
             <TouchableOpacity style={styles.actionButton} >
                 <View style={styles.areaButton}>
-                    <AntDesign name="tagso" size={26} color="#000" />
+                    <AntDesign name="export" size={26} color="#000" />
                 </View>
-                <Text style={styles.labelButton}>Compras</Text>
+                <Text style={styles.labelButton}>Empréstimo</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.actionButton} onPress={navigateToScreen('Cartao')}>
@@ -58,7 +58,7 @@ export default function Actions() {
                 <View style={styles.areaButton}>
                     <Feather name="user" size={26} color="#000" />
                 </View>
-                <Text style={styles.labelButton}>Conta</Text>
+                <Text style={styles.labelButton}>Perfil</Text>
             </TouchableOpacity>
 
         </ScrollView>

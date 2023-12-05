@@ -54,7 +54,7 @@ export default function Cartao() {
 
         <TouchableOpacity style={styles.buttonTransfer}
           onPress={transferir}>
-          Transferir
+          Solicitar
         </TouchableOpacity>
 
 

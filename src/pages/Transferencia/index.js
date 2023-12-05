@@ -43,30 +43,24 @@ export default function Transferencia() {
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
 
         <Text style={styles.title}>Origem</Text>
-        <TextInputMask
+        <TextInput
           placeholder="Digite id de sua conta"
           style={styles.input}
           onChangeText={(e) => setOrigem(e)}
-          keyboardType="numeric"
-          type="only-numbers"
         />
 
         <Text style={styles.title}>Valor</Text>
-        <TextInputMask
+        <TextInput
           placeholder="Digite o valor"
           style={styles.input}
           onChangeText={(e) => setValor(e)}
-          keyboardType="numeric"
-          type="money"
         />
 
         <Text style={styles.title}>Destino</Text>
-        <TextInputMask
+        <TextInput
           placeholder="Digite o id do destinatario"
           style={styles.input}
           onChangeText={(e) => setDestino(e)}
-          keyboardType="numeric"
-          type="only-numbers"
         />
 
         <TouchableOpacity style={styles.buttonTransfer}
