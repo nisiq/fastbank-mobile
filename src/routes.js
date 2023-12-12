@@ -12,6 +12,7 @@ import Transferencia from './pages/Transferencia'
 
 import CustomTabBar from './components/CustomTabBar';
 import Cartao from './pages/Cartao';
+import Emprestimo from './pages/Emprestimo';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -64,7 +65,7 @@ const AuthStack = () => (
     <Stack.Screen name="Login" component={Login} />
     <Stack.Screen name="Transferencia" component={Transferencia} />
     <Stack.Screen name="Cartao" component={Cartao} />
-
+    <Stack.Screen name="Emprestimo" component={Emprestimo} />
 
   </Stack.Navigator>
 );

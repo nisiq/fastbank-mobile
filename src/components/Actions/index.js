@@ -26,7 +26,7 @@ export default function Actions() {
             </TouchableOpacity>
 
 
-            <TouchableOpacity style={styles.actionButton} >
+            <TouchableOpacity style={styles.actionButton} onPress={navigateToScreen('Emprestimo')} >
                 <View style={styles.areaButton}>
                     <AntDesign name="export" size={26} color="#000" />
                 </View>

@@ -38,7 +38,7 @@ export default function Login() {
     }
     // Autenticação com o servidor
     axios
-      .post('https://c54c-179-125-150-107.ngrok-free.app/api/token/', {
+      .post('https://51ab-189-57-188-42.ngrok-free.app/api/token/', {
         password: password,
         cpf: cpf,
       })
