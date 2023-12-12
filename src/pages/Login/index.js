@@ -38,16 +38,18 @@ export default function Login() {
     }
     // Autenticação com o servidor
     axios
-      .post('https://ca2b-179-125-150-107.ngrok-free.app/api/token/', {
+      .post('https://c54c-179-125-150-107.ngrok-free.app/api/token/', {
         password: password,
         cpf: cpf,
       })
       .then((res) => {
         if (res && res.data && res.data.access) {
           const { access: token } = res.data;
+          console.log('Token obtido:', token);
+
 
           // Armazenar o token
-          AsyncStorage.setItem('chave', token);
+          AsyncStorage.setItem('token', token);
 
           // Token como padrão para as futuras solicitações
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

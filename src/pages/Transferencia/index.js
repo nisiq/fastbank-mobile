@@ -18,7 +18,9 @@ export default function Transferencia() {
   const transferir = async () => {
     try {
       // Obter o token armazenado
-      const token = await AsyncStorage.getItem('chave');
+      const token = await AsyncStorage.getItem('token');
+      console.log('Token do AsyncStorage:', token);
+
   
       // Verificar se o token está presente
       if (!token) {
@@ -27,7 +29,9 @@ export default function Transferencia() {
       }
   
       // URL para a transferência
-      const url = `https://ca2b-179-125-150-107.ngrok-free.app/api/v1/accounts/${origem}/transferir/`;
+      const url = `https://c54c-179-125-150-107.ngrok-free.app/api/v1/accounts/${origem}/transferir/`;
+      console.log('URL da Transferência:', url);
+
   
       // Configuração do cabeçalho com o token de autorização
       const headers = {
@@ -40,6 +44,9 @@ export default function Transferencia() {
         conta_destino: destino,
         valor: valor,
       };
+
+      console.log('Dados da Transferência:', data);
+
   
       // Realizar a solicitação de transferência
       const response = await axios.post(url, data, { headers });
