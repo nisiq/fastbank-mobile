@@ -29,7 +29,7 @@ export default function Transferencia() {
       }
   
       // URL para a transferência
-      const url = `https://cff7-179-125-150-230.ngrok-free.app/api/v1/accounts/${origem}/transferir/`;
+      const url = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/accounts/${origem}/transferir/`;
       console.log('URL da Transferência:', url);
 
   

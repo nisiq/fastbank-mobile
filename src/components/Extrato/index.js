@@ -1,34 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 
+export default function Extrato() {
+  const [accountData, setAccountData] = useState({
+    saldo: '',
+  });
 
-export default function Extrato({saldo, gastos}) {
-    return (
-        <View style={styles.container}>
+  useEffect(() => {
+    const fetchAccountData = async () => {
+      try {
+        // Retrieve the token from AsyncStorage
+        const token = await AsyncStorage.getItem('token');
+        console.log('Token do AsyncStorage:', token);
 
-            <View style={styles.item}>
-                <Text style={styles.itemTitle}>Saldo</Text>
+        if (!token) {
+          console.error('Token não encontrado. Faça login para obter um token válido.');
+          return;
+        }
 
-                <View style={styles.content}>
-                    <Text style={styles.currencySymbol}>R$</Text>
-                    <Text style={styles.balance}>{saldo}</Text>
-                </View>
-            </View>
+        // Decode the token to get user information, such as the user ID
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.user_id;
 
-            <View style={styles.item}>
-                <Text style={styles.itemTitle}>Gastos</Text>
+        // URL for the account data
+        const url = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/accounts/${userId}/`;
+        console.log('URL da Conta:', url);
 
-                <View style={styles.content}>
-                    <Text style={styles.currencySymbol}>R$</Text>
-                    <Text style={styles.expenses}>{gastos}</Text>
-                </View>
-            </View>
+        // Make a request to get the account data
+        const accountResponse = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
+        console.log('Dados da Conta:', accountResponse.data);
 
+        // Update the state with the fetched data
+        setAccountData({
+          saldo: accountResponse.data.saldo, // Assuming saldo is the correct property
+        });
+      } catch (error) {
+        console.error('Erro ao obter dados da conta:', error);
+      }
+    };
 
-        </View>    
+    fetchAccountData();
+  }, []);
 
-    );
+  return (
+    <View style={styles.container}>
+      <View style={styles.item}>
+        <Text style={styles.itemTitle}>Saldo</Text>
+
+        <View style={styles.content}>
+          <Text style={styles.currencySymbol}>R$</Text>
+          <Text style={styles.balance}>{accountData.saldo}</Text>
+        </View>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.itemTitle}>Gastos</Text>
+
+        <View style={styles.content}>
+          <Text style={styles.currencySymbol}>R$</Text>
+          <Text style={styles.expenses}>120,00</Text>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

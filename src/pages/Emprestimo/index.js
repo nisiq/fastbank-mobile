@@ -4,12 +4,11 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import axios from 'axios';
 import { TextInputMask } from 'react-native-masked-text';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from "jwt-decode";
 import Toast from 'react-native-toast-message';
-
+import { jwtDecode } from "jwt-decode";
+import "core-js/stable/atob";
 
 export default function Emprestimo() {
-
     const [valor, setValor] = useState('')
     const [num_parcelas, setNumParcelas] = useState('')
 
@@ -29,7 +28,7 @@ export default function Emprestimo() {
             const userId = decodedToken.user_id;
 
             // URL para a transferência
-            const url = `https://cff7-179-125-150-230.ngrok-free.app/api/v1/accounts/${userId}/solicitar_emprestimo/`;
+            const url = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/accounts/${userId}/solicitar_emprestimo/`;
             console.log('URL da Transferência:', url);
 
 

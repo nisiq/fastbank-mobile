@@ -38,7 +38,7 @@ export default function Cartao() {
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.user_id;
 
-      const url = `https://cff7-179-125-150-230.ngrok-free.app/api/v1/accounts/${userId}/solicitar_cartao/`;
+      const url = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/accounts/${userId}/solicitar_cartao/`;
       console.log('URL da Transferência:', url);
 
       const headers = {

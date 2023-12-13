@@ -13,24 +13,24 @@ import axios from 'axios';
 const list = [
   {
     id: 1,
-    label: 'Enxuto',
-    value: '23,90',
+    label: 'Salario',
+    value: '2.300,30',
     date: '22/10/2023',
-    type: 0 //despesas
+    type: 0
   },
   {
     id: 2,
-    label: 'Pix Cliente Unoon',
+    label: 'Pix Lindomar Batistao',
     value: '45,00',
     date: '23/10/2023',
-    type: 1 //receita/entrada
+    type: 1
   },
   {
     id: 3,
-    label: 'Salário',
-    value: '4.300,20',
+    label: 'Padaria',
+    value: '4.230,00',
     date: '23/10/2023',
-    type: 1 //receita/entrada
+    type: 1
   },
 ]
 
@@ -48,7 +48,7 @@ export default function Home() {
 
         if (token) {
           // Realiza a requisição para obter dados do usuário utilizando o token
-          const response = await axios.get('https://cff7-179-125-150-230.ngrok-free.app/api/v1/user/me/', {
+          const response = await axios.get('https://3a72-189-57-188-42.ngrok-free.app/api/v1/user/me/', {
             headers: {
               Authorization: `Bearer ${token}`,
             },

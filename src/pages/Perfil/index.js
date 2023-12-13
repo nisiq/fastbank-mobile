@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import * as ImagePicker from 'expo-image-picker';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const Perfil = () => {
     const [userData, setUserData] = useState({
@@ -16,13 +18,13 @@ const Perfil = () => {
     const [userAccount, setUserAccount] = useState({
         agencia: '',
         numero: '',
-        // Adicione outros campos conforme necessário
     });
+
+    const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
         const carregarDados = async () => {
             try {
-                // Obter o token do AsyncStorage
                 const token = await AsyncStorage.getItem('token');
                 console.log('Token do AsyncStorage:', token);
 
@@ -31,40 +33,34 @@ const Perfil = () => {
                     return;
                 }
 
-                // Decodificar o token para obter informações, como o ID do usuário
                 const decodedToken = jwtDecode(token);
                 const userId = decodedToken.user_id;
 
-                // URL para obter os dados do usuário
-                const userUrl = `http://127.0.0.1:8000/api/v1/user/me/`;
-                // URL para obter os dados da conta
-                const accountUrl = `http://127.0.0.1:8000/api/v1/accounts/${userId}/`;
+                const userUrl = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/user/me/`;
+                const accountUrl = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/accounts/${userId}/`;
 
-                // Cabeçalho com o token
                 const headers = {
                     Authorization: `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "69420",
                 };
 
-                // Obter dados do usuário
-                const userResponse = await axios.get(userUrl, { headers });
-                // Obter dados da conta
-                const accountResponse = await axios.get(accountUrl, { headers });
-
-                // Atualizar o estado com os dados obtidos
-                setUserData({
-                    first_name: userResponse.data.first_name,
-                    last_name: userResponse.data.last_name,
-                    cpf: userResponse.data.cpf,
-                    email: userResponse.data.email,
-                    url_imagem: userResponse.data.url_imagem,
-                    // Adicione outros campos conforme necessário
+                await axios.get(userUrl, { headers })
+                .then((resp) => {
+                     setUserData({
+                    first_name: resp.data.first_name,
+                    last_name: resp.data.last_name,
+                    cpf: resp.data.cpf,
+                    email: resp.data.email,
+                    url_imagem: resp.data.url_imagem,
                 });
-
-                // Atualizar o estado dos dados da conta
+                })
+                .catch((err) => {
+                    console.log("erro: " + err)   
+                })
+                const accountResponse = await axios.get(accountUrl, { headers });
                 setUserAccount({
                     agencia: accountResponse.data.agencia,
                     numero: accountResponse.data.numero,
-                    // Adicione outros campos conforme necessário
                 });
             } catch (error) {
                 console.error('Erro ao carregar dados do perfil:', error);
@@ -72,22 +68,78 @@ const Perfil = () => {
         };
 
         carregarDados();
-    }, []); // O segundo argumento vazio faz com que o useEffect execute apenas uma vez no carregamento do componente
+    }, []);
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setSelectedImage(result.assets[0].uri);
+        }
+    };
+
+    const handleUpdatePic = async () => {
+        try {
+            const formData = new FormData();
+            formData.append("url_imagem", {
+                uri: selectedImage,
+                name: "photo.jpg",
+                type: "image/jpg",
+            });
+
+            const token = await AsyncStorage.getItem('token');
+            const decodedToken = jwtDecode(token);
+            const userId = decodedToken.user_id;
+
+            const url = `https://3a72-189-57-188-42.ngrok-free.app/api/v1/user/me/`;
+
+            await axios.patch(url, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+
+            });
+
+            console.log("Imagem enviada com sucesso");
+        } catch (error) {
+            console.error("Erro ao enviar imagem:", error.toJSON());
+        }
+    };
+
+    useEffect(() => {
+        if (selectedImage) {
+            handleUpdatePic();
+        }
+    }, [selectedImage]);
 
     return (
         <View style={styles.container}>
             <Text>Perfil</Text>
-            {/* Renderizar os dados do usuário aqui */}
+
+            {!userData.url_imagem && (
+                <Pressable onPress={pickImage}>
+                    <FontAwesome5 name="user-circle" size={70} color="#c0c0c0" />
+                </Pressable>
+            )}
+            {userData.url_imagem && (
+                <Pressable onPress={pickImage}>
+                    <Image source={{ uri: userData.url_imagem }} style={{ width: 100, height: 100 }} />
+                </Pressable>
+            )}
+
             <Text>Nome: {userData.first_name}</Text>
             <Text>Sobrenome: {userData.last_name}</Text>
             <Text>CPF: {userData.cpf}</Text>
             <Text>Email: {userData.email}</Text>
-            {/* Adicione outros campos conforme necessário */}
 
-            {/* Renderizar os dados da conta aqui */}
             <Text>Agência: {userAccount.agencia}</Text>
             <Text>Número: {userAccount.numero}</Text>
-            {/* Adicione outros campos conforme necessário */}
         </View>
     );
 };
