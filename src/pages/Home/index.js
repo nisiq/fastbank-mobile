@@ -48,7 +48,7 @@ export default function Home() {
 
         if (token) {
           // Realiza a requisição para obter dados do usuário utilizando o token
-          const response = await axios.get('https://2096-179-125-150-230.ngrok-free.app/api/v1/user/me/', {
+          const response = await axios.get('https://cff7-179-125-150-230.ngrok-free.app/api/v1/user/me/', {
             headers: {
               Authorization: `Bearer ${token}`,
             },

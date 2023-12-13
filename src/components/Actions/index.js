@@ -54,7 +54,7 @@ export default function Actions() {
                 <Text style={styles.labelButton}>Conta</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionButton}>
+            <TouchableOpacity style={styles.actionButton} onPress={navigateToScreen('Perfil')}>
                 <View style={styles.areaButton}>
                     <Feather name="user" size={26} color="#000" />
                 </View>
