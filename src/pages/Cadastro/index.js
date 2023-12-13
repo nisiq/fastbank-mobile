@@ -15,7 +15,7 @@ export default function Cadastro() {
 
 
   const cadastrar = () => {
-    axios.post('https://c54c-179-125-150-107.ngrok-free.app/api/v1/user/create',
+    axios.post('https://2096-179-125-150-230.ngrok-free.app/api/v1/user/create',
       {
         email: email,
         password: password,

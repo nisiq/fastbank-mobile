@@ -29,7 +29,7 @@ export default function Emprestimo() {
             const userId = decodedToken.user_id;
 
             // URL para a transferência
-            const url = `https://51ab-189-57-188-42.ngrok-free.app/api/v1/accounts/${userId}/solicitar_emprestimo/`;
+            const url = `https://2096-179-125-150-230.ngrok-free.app/api/v1/accounts/${userId}/solicitar_emprestimo/`;
             console.log('URL da Transferência:', url);
 
 

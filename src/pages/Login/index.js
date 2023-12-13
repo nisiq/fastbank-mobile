@@ -32,99 +32,104 @@ export default function Login() {
   };
 
   const logar = () => {
-    if (isButtonDisabled) {
-      // Se o botão estiver desativado, não faz nada
-      return;
+    try {
+      if (isButtonDisabled) {
+        // Se o botão estiver desativado, não faz nada
+        return;
+      }
+      // Autenticação com o servidor
+      axios
+        .post('https://2096-179-125-150-230.ngrok-free.app/api/token/', {
+          password: password,
+          cpf: cpf,
+        })
+        .then((res) => {
+          if (res && res.data && res.data.access) {
+            const { access: token } = res.data;
+            console.log('Token obtido:', token);
+  
+            // Armazenar o token
+            AsyncStorage.setItem('token', token);
+  
+            // Token como padrão para as futuras solicitações
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            setPasswordAttempts(0);
+            // Sucesso, navegar para a página inicial
+            navigation.navigate('Main');
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          // Incrementar o contador de tentativas
+          const newAttempts = passwordAttempts + 1;
+          setPasswordAttempts(newAttempts);
+  
+          // Se exceder 3 tentativas, bloquear o botão e exibir a notificação
+          if (newAttempts >= 3) {
+            setIsButtonDisabled(true);
+            showToast(); // Exibir notificação
+            setTimeout(() => {
+              // Desbloquear o botão após 1 minuto
+              setIsButtonDisabled(false);
+              setPasswordAttempts(0); // Reiniciar o contador após o desbloqueio
+            }, 60000); // 1 minuto em milissegundos
+          }
+        });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error(error.response.data);
+      }
     }
-    // Autenticação com o servidor
-    axios
-      .post('https://51ab-189-57-188-42.ngrok-free.app/api/token/', {
-        password: password,
-        cpf: cpf,
-      })
-      .then((res) => {
-        if (res && res.data && res.data.access) {
-          const { access: token } = res.data;
-          console.log('Token obtido:', token);
-
-
-          // Armazenar o token
-          AsyncStorage.setItem('token', token);
-
-          // Token como padrão para as futuras solicitações
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          setPasswordAttempts(0);
-          // Sucesso, navegar para a página inicial
-          navigation.navigate('Main');
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        // Incrementar o contador de tentativas
-        const newAttempts = passwordAttempts + 1;
-        setPasswordAttempts(newAttempts);
-
-        // Se exceder 3 tentativas, bloquear o botão e exibir a notificação
-        if (newAttempts >= 3) {
-          setIsButtonDisabled(true);
-          showToast(); // Exibir notificação
-          setTimeout(() => {
-            // Desbloquear o botão após 1 minuto
-            setIsButtonDisabled(false);
-            setPasswordAttempts(0); // Reiniciar o contador após o desbloqueio
-          }, 60000); // 1 minuto em milissegundos
-        }
-      });
   };
 
 
-  return (
-    <View style={styles.container}>
+return (
+  <View style={styles.container}>
 
-      <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
-        <Text style={styles.message}>Tela Login</Text>
-        <Animatable.Image
-          animation="flipInY" // Animação no Logo
-          style={{ width: '100%' }}
-          resizeMode="contain" // Mantém a proporção da imagem
-        />
-      </Animatable.View>
+    <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
+      <Text style={styles.message}>Tela Login</Text>
+      <Animatable.Image
+        animation="flipInY" // Animação no Logo
+        style={{ width: '100%' }}
+        resizeMode="contain" // Mantém a proporção da imagem
+      />
+    </Animatable.View>
 
-      <Animatable.View animation="fadeInUp" style={styles.containerForm}>
+    <Animatable.View animation="fadeInUp" style={styles.containerForm}>
 
 
 
-        <Text style={styles.title}>CPF</Text>
-        <TextInput
-          placeholder="Digite seu cpf"
-          style={styles.input}
-          onChangeText={(e) => setCpf(e)}
-        />
+      <Text style={styles.title}>CPF</Text>
+      <TextInput
+        placeholder="Digite seu cpf"
+        style={styles.input}
+        onChangeText={(e) => setCpf(e)}
+      />
 
-        <Text style={styles.title}>Senha</Text>
-        <TextInput
-          placeholder="Digite sua senha"
-          style={styles.input}
-          onChangeText={(e) => setPassword(e)}
-        />
+      <Text style={styles.title}>Senha</Text>
+      <TextInput
+        placeholder="Digite sua senha"
+        style={styles.input}
+        onChangeText={(e) => setPassword(e)}
+      />
 
-        {/* Botão para Validar Acesso */}
-        <TouchableOpacity style={styles.button} onPress={logar}>
-          <Text style={styles.buttonText}>Acessar</Text>
-        </TouchableOpacity>
+      {/* Botão para Validar Acesso */}
+      <TouchableOpacity style={styles.button} onPress={logar}>
+        <Text style={styles.buttonText}>Acessar</Text>
+      </TouchableOpacity>
 
-        {/* Botão para Criar uma Conta */}
-        <TouchableOpacity style={styles.buttonRegistrar}
-          onPress={() => navigation.navigate('Cadastro')}
-          disabled={isButtonDisabled}
-        >
-          <Text style={styles.registerText}>Não Possui uma conta? Clique aqui</Text>
-        </TouchableOpacity>
+      {/* Botão para Criar uma Conta */}
+      <TouchableOpacity style={styles.buttonRegistrar}
+        onPress={() => navigation.navigate('Cadastro')}
+        disabled={isButtonDisabled}
+      >
+        <Text style={styles.registerText}>Não Possui uma conta? Clique aqui</Text>
+      </TouchableOpacity>
 
-      </Animatable.View>
+    </Animatable.View>
 
-    </View>
-  );
+  </View>
+);
 }
 
 const styles = StyleSheet.create({
